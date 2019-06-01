@@ -37,13 +37,16 @@ handler.on('push', function (event) {
         console.log(JSON.stringify(event.payload,2,2))
         // 分支判断
         if(event.payload.ref === 'refs/heads/master'){
-            console.log('deploy master..')
-            
-            run_cmd('sh', ['./deploy.sh'], function(text){ console.log(text) });
-                    // 分支判断
+            console.log('push master..')
             let msg = event.payload.head_commit.message
             let autohr  = event.payload.head_commit.author.name
-    worker.send({author, msg})
+
+            if(msg.indexOf('@deoloy')>-1){
+                console.log('deploy master..')
+                run_cmd('sh', ['./deploy.sh'], function(text){ console.log(text) });
+                worker.send({author, msg})
+            }
+ 
 
         }
       
