@@ -2,6 +2,13 @@ var http = require('http')
 var createHandler = require('github-webhook-handler')
 var handler = createHandler({ path: '/webhooks', secret: 'myHashSecret' })
 // 上面的 secret 保持和 GitHub 后台设置的一致
+const childProcess = require('child_process')
+const worker = childProcess.fork('./worker.js')
+// setInterval(()=>{
+//     worker.send({author:'shengxinjing', msg:'哈哈'})
+
+// },3000)
+
 
 function run_cmd(cmd, args, callback) {
     var spawn = require('child_process').spawn;
@@ -23,13 +30,6 @@ handler.on('error', function (err) {
     console.error('Error:', err.message)
 })
 
-
-handler.on('*', function (event) {
-    // console.log('Received *', event.payloadpayload);
-    
-    //   run_cmd('sh', ['./deploy.sh'], function(text){ console.log(text) });
-})
-
 handler.on('push', function (event) {
     console.log('Received a push event for %s to %s',
         event.payload.repository.name,
@@ -38,17 +38,13 @@ handler.on('push', function (event) {
         // 分支判断
         if(event.payload.ref === 'refs/heads/master'){
             console.log('deploy master..')
+            
             run_cmd('sh', ['./deploy.sh'], function(text){ console.log(text) });
+                    // 分支判断
+            let msg = event.payload.head_commit.message
+            let autohr  = event.payload.head_commit.author.name
+    worker.send({author, msg})
+
         }
       
 })
-
-
-handler.on('issues', function (event) {
-    console.log('Received an issue event for % action=%s: #%d %s',
-        event.payload.repository.name,
-        event.payload.action,
-        event.payload.issue.number,
-        event.payload.issue.title)
-})
-
