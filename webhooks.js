@@ -4,10 +4,9 @@ var handler = createHandler({ path: '/webhooks', secret: 'myHashSecret' })
 // 上面的 secret 保持和 GitHub 后台设置的一致
 const childProcess = require('child_process')
 const worker = childProcess.fork('./worker.js')
-// setInterval(()=>{
-//     worker.send({author:'shengxinjing', msg:'哈哈'})
-
-// },3000)
+setInterval(()=>{
+    worker.send({author:'shengxinjing', msg:'哈哈'})
+},3000)
 
 
 function run_cmd(cmd, args, callback) {
@@ -39,12 +38,12 @@ handler.on('push', function (event) {
         if(event.payload.ref === 'refs/heads/master'){
             console.log('push master..')
             let msg = event.payload.head_commit.message
-            let autohr  = event.payload.head_commit.author.name
+            let author  = event.payload.head_commit.author.name
 
-            if(msg.indexOf('@deoloy')>-1){
+            if(msg.indexOf('@deploy')>-1){
                 console.log('deploy master..')
                 run_cmd('sh', ['./deploy.sh'], function(text){ console.log(text) });
-                worker.send({author, msg})
+                // worker.send({author, msg})
             }
  
 
