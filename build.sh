@@ -1,9 +1,7 @@
 
-read -p "请输入用户名称:" name
-echo -e "\n"
-echo "用户名为:$name"
+read -p "请git信息:" name
 
 npm run build
 git add .
-git commit -m 'fix'
+git commit -m '$name'
 git push origin master
