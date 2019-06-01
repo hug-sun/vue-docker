@@ -25,7 +25,8 @@ handler.on('error', function (err) {
 
 
 handler.on('*', function (event) {
-    console.log('Received *', event.payload);
+    // console.log('Received *', event.payloadpayload);
+    
     //   run_cmd('sh', ['./deploy.sh'], function(text){ console.log(text) });
 })
 
