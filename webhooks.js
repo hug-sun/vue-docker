@@ -3,10 +3,10 @@ var createHandler = require('github-webhook-handler')
 var handler = createHandler({ path: '/webhooks', secret: 'myHashSecret' })
 // 上面的 secret 保持和 GitHub 后台设置的一致
 const childProcess = require('child_process')
-const worker = childProcess.fork('./worker.js')
-setInterval(()=>{
-    worker.send({author:'shengxinjing', msg:'哈哈'})
-},3000)
+// const worker = childProcess.fork('./worker.js')
+// setInterval(()=>{
+//     worker.send({author:'shengxinjing', msg:'哈哈'})
+// },3000)
 
 
 function run_cmd(cmd, args, callback) {
