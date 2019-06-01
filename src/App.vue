@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Docker部署
+    <h1>Docker部署12
     </h1>
     <div id="nav">
       <router-link to="/">Home</router-link> |
