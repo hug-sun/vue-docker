@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <h1>Docker部署测试一下 - @deploy
+    <h1>Docker部署测试一下 - @deploy 哈哈
       
     </h1>
     <h2>
       commit信息中带上@deploy 我们就自动部署docker
-      
+
     </h2>
     <div id="nav">
       <router-link to="/">Home</router-link> |
