@@ -1,4 +1,5 @@
 #docker build -t kkb-frontend git@github.com:kkbjs/vue-docker.git
+
 git pull
 docker build -t kkb-frontend-image .
 docker stop kkb-frontend-container
