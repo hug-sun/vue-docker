@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "github-webhook-handler": "^0.7.1",
     "qrcode-terminal": "^0.12.0",
     "vue": "^2.6.10",
